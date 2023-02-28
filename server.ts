@@ -1,7 +1,12 @@
 import express from 'express'
-import baseRoutes from './routes/base'
 import dotenv from 'dotenv'
 import cors from 'cors'
+
+import baseRoutes from './routes/base'
+import reserveRoutes from './routes/reserve'
+import userRoutes from './routes/user'
+
+import { addProviderToRequest } from './middlewares/provider'
 
 dotenv.config()
 
@@ -11,17 +16,15 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-// routes
+// add middleware
+app.use('/api/', addProviderToRequest)
+
+// add routes
 app.use('/api/', baseRoutes)
+app.use('/api/', reserveRoutes)
+app.use('/api/', userRoutes)
 
-const envPort = process.env.PORT
-
-// -- In case port (or any other env variable is needed) --
-// if (!envPort) {
-//   throw new Error('PORT env variable must have a value.')
-// }
-
-const port = envPort || 4400
+const port = process.env.PORT || 4400
 const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}/api`)
 })
