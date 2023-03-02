@@ -28,15 +28,23 @@
     "eslint-plugin-n": "^15.2.5",
     "eslint-plugin-promise": "^6.0.1",
     "eslint-plugin-react": "^7.31.7",
+    "ethers": "^5.7.2",
     "husky": "^8.0.0",
     "nodemon": "^2.0.20",
     "prettier": "2.7.1",
+    "reflect-metadata": "^0.1.13",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
   },
   "dependencies": {
+    "@aave/contract-helpers": "^1.13.5",
+    "@aave/core-v3": "^1.17.2",
+    "@aave/math-utils": "^1.13.5",
     "cors": "^2.8.5",
+    "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "web3": "^1.8.2",
+    "web3-utils": "^1.8.2"
   }
 }

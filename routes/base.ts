@@ -4,6 +4,6 @@ import { getExample } from '../controllers/base'
 
 const baseRoutes = Router()
 
-baseRoutes.get('/getExample', getExample)
+baseRoutes.get('/get-example', getExample)
 
 export default baseRoutes
