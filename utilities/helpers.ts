@@ -2,8 +2,8 @@ import { UserWalletBalancesResponse } from '@aave/contract-helpers'
 import { BigNumber } from 'ethers'
 import { PROVIDERS_DATA } from './constants'
 
-export const getProviderDataByAddress = (address: string) => {
-  const data = Object.entries(PROVIDERS_DATA).find((x) => x[1].lendingPoolProviderAddress === address)
+export const getProviderDataByChainId = (id: number) => {
+  const data = Object.entries(PROVIDERS_DATA).find((x) => x[1].chainId === id)
   return data?.[1]
 }
 

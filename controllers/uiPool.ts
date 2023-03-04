@@ -1,17 +1,19 @@
-import dayjs from 'dayjs'
+import { UserWalletBalancesResponse } from '@aave/contract-helpers'
 import { formatReserves, formatUserSummary } from '@aave/math-utils'
+import dayjs from 'dayjs'
 import { Provider } from '../provider/Provider'
+import { formatWalletBalances } from '../utilities/helpers'
 
 export const getReservesSummary = async (req: any, res: any) => {
   try {
     const provider = req.provider as Provider
     const userAddress = req.query.user
 
-    const reserves = await provider.uiPoolDataProviderContract.getReservesHumanized({
+    const reserves = await provider.uiPoolDataProvider.getReservesHumanized({
       lendingPoolAddressProvider: provider.lendingPoolProviderAddress,
     })
 
-    const userReserves = await provider.uiPoolDataProviderContract.getUserReservesHumanized({
+    const userReserves = await provider.uiPoolDataProvider.getUserReservesHumanized({
       lendingPoolAddressProvider: provider.lendingPoolProviderAddress,
       user: userAddress,
     })
@@ -48,19 +50,20 @@ export const getReservesSummary = async (req: any, res: any) => {
   }
 }
 
-export const getReserveData = async (req: any, res: any) => {
+export const getBalances = async (req: any, res: any) => {
   try {
     const provider = req.provider as Provider
-    const reserveAddress = req.query.reserve
+    const userAddress = req.query.user
 
-    const reserveList = await provider.poolProviderContract.methods
-      .getReserveData(reserveAddress)
-      .call()
-      .catch((e) => {
-        console.log(e.message)
-      })
+    const walletBalances: UserWalletBalancesResponse =
+      await provider.walletBalanceProvider.getUserWalletBalancesForLendingPoolProvider(
+        userAddress,
+        provider.lendingPoolProviderAddress
+      )
 
-    const jsonContent = JSON.stringify(reserveList)
+    const walletBalancesFormatted = formatWalletBalances(walletBalances)
+
+    const jsonContent = JSON.stringify(walletBalancesFormatted)
 
     res.status(200).send(jsonContent)
   } catch (err) {

@@ -37,14 +37,12 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "@aave/contract-helpers": "^1.13.5",
+    "@aave/contract-helpers": "^1.13.6",
     "@aave/core-v3": "^1.17.2",
     "@aave/math-utils": "^1.13.5",
     "cors": "^2.8.5",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
-    "express": "^4.17.1",
-    "web3": "^1.8.2",
-    "web3-utils": "^1.8.2"
+    "express": "^4.17.1"
   }
 }
