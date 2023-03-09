@@ -40,9 +40,11 @@
     "@aave/contract-helpers": "^1.13.6",
     "@aave/core-v3": "^1.17.2",
     "@aave/math-utils": "^1.13.5",
+    "@types/pg": "^8.6.6",
     "cors": "^2.8.5",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pg": "^8.10.0"
   }
 }

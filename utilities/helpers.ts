@@ -4,7 +4,7 @@ import { PROVIDERS_DATA } from './constants'
 
 export const getProviderDataByChainId = (id: number) => {
   const data = Object.entries(PROVIDERS_DATA).find((x) => x[1].chainId === id)
-  return data?.[1]
+  return data?.[1] || PROVIDERS_DATA.GOERLI
 }
 
 export const formatWalletBalances = (balances: UserWalletBalancesResponse) => {

@@ -1,3 +1,6 @@
+import db = require('../config/database')
+import { insertDeposit } from '../queries/queries'
+
 import { Provider } from '../provider/Provider'
 
 export const getReserveData = async (req: any, res: any) => {
@@ -29,6 +32,8 @@ export const depositAsset = async (req: any, res: any) => {
     const { asset, amount, onBehalfOf } = data
 
     const decimals = await provider.erc20Provider.decimals()
+    const tag = provider.baseAssetSymbol
+
     const tokenSupply = amount * Math.pow(10, decimals)
 
     // await provider.erc20ProviderContract.methods
@@ -41,19 +46,20 @@ export const depositAsset = async (req: any, res: any) => {
     //   .catch((e) => {
     //     console.log(e.message)
     //   })
-    const txApprove = await provider.erc20Provider.approve(provider.poolProxyProviderAddress, tokenSupply, {
-      from: onBehalfOf,
-      gasLimit: 500000,
-    })
-    console.log(txApprove)
+    // const txApprove = await provider.erc20Provider.approve(provider.poolProxyProviderAddress, tokenSupply, {
+    //   from: onBehalfOf,
+    //   gasLimit: 500000,
+    // })
+    // console.log(txApprove)
 
-    const txSupply = await provider.poolProxyProvider.supply(asset, tokenSupply, onBehalfOf, 0, {
-      from: onBehalfOf,
-      gasLimit: 500000,
-    })
-    console.log(txSupply)
+    // const txSupply = await provider.poolProxyProvider.supply(asset, tokenSupply, onBehalfOf, 0, {
+    //   from: onBehalfOf,
+    //   gasLimit: 500000,
+    // })
+    // console.log(txSupply)
 
-    res.status(200).send({})
+    const { rows } = await db.query(insertDeposit(tag, 'tx', amount), null)
+    res.status(200).send(rows[0])
   } catch (err) {
     console.log(err)
     res.status(400).send('Oops... something went wrong')

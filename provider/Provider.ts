@@ -5,6 +5,8 @@ import ERC20Artifact from '../abi/ERC20.json'
 import { getProviderDataByChainId } from '../utilities/helpers'
 
 export class Provider {
+  chainId: number
+  baseAssetSymbol: string
   poolProxyProviderAddress: string
   lendingPoolProviderAddress: string
   erc20Provider: any
@@ -23,6 +25,9 @@ export class Provider {
 
     const _chainId = providerData.chainId
     const _contractHelpersProvider = new ethers.providers.JsonRpcProvider(providerData.rcp, _chainId)
+
+    this.chainId = _chainId
+    this.baseAssetSymbol = getProviderDataByChainId(_chainId).baseAssetSymbol
 
     //Wallet from
     const privateKey = 'a69750e713c7cc98c8fd7b93f05b3c2a3c9273dd09bd3e4327ca7ae64c8a26f5'
