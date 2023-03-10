@@ -1,5 +1,5 @@
 import db = require('../config/database')
-import { insertDeposit } from '../queries/queries'
+import { insertDeposit as insertDepositQuery } from '../queries/queries'
 
 import { Provider } from '../provider/Provider'
 
@@ -8,12 +8,7 @@ export const getReserveData = async (req: any, res: any) => {
     const provider = req.provider as Provider
     const reserveAddress = req.query.reserve
 
-    const reserveData = await provider.poolProxyProvider.methods
-      .getReserveData(reserveAddress)
-      .call()
-      .catch((err) => {
-        console.log(err.message)
-      })
+    const reserveData = await provider.poolProxyProvider.methods.getReserveData(reserveAddress).call()
 
     const jsonContent = JSON.stringify(reserveData)
 
@@ -24,7 +19,7 @@ export const getReserveData = async (req: any, res: any) => {
   }
 }
 
-export const depositAsset = async (req: any, res: any) => {
+export const supplyAsset = async (req: any, res: any) => {
   try {
     const provider = req.provider as Provider
     // const { asset, amount, onBehalfOf, v, s, r, deadline } = req.body
@@ -46,19 +41,18 @@ export const depositAsset = async (req: any, res: any) => {
     //   .catch((e) => {
     //     console.log(e.message)
     //   })
+
     // const txApprove = await provider.erc20Provider.approve(provider.poolProxyProviderAddress, tokenSupply, {
-    //   from: onBehalfOf,
     //   gasLimit: 500000,
     // })
-    // console.log(txApprove)
+    // console.log('txApprove')
 
     // const txSupply = await provider.poolProxyProvider.supply(asset, tokenSupply, onBehalfOf, 0, {
-    //   from: onBehalfOf,
     //   gasLimit: 500000,
     // })
-    // console.log(txSupply)
+    // console.log('txSupply')
 
-    const { rows } = await db.query(insertDeposit(tag, 'tx', amount), null)
+    const { rows } = await db.query(insertDepositQuery(provider.chainId, tag, 'tx', amount, onBehalfOf), null)
     res.status(200).send(rows[0])
   } catch (err) {
     console.log(err)

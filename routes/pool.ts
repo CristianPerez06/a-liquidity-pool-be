@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import { depositAsset, getReserveData } from '../controllers/pool'
+import { supplyAsset, getReserveData } from '../controllers/pool'
 
 const poolRoutes = Router()
 
 poolRoutes.get('/reserve-data', getReserveData)
-poolRoutes.post('/deposit-asset', depositAsset)
+poolRoutes.post('/supply-asset', supplyAsset)
 
 export default poolRoutes

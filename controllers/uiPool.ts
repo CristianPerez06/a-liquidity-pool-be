@@ -7,7 +7,7 @@ import { formatWalletBalances } from '../utilities/helpers'
 export const getReservesSummary = async (req: any, res: any) => {
   try {
     const provider = req.provider as Provider
-    const userAddress = req.query.user
+    const userAddress = req.query.account
 
     const reserves = await provider.uiPoolDataProvider.getReservesHumanized({
       lendingPoolAddressProvider: provider.lendingPoolProviderAddress,
@@ -53,7 +53,7 @@ export const getReservesSummary = async (req: any, res: any) => {
 export const getBalances = async (req: any, res: any) => {
   try {
     const provider = req.provider as Provider
-    const userAddress = req.query.user
+    const userAddress = req.query.account
 
     const walletBalances: UserWalletBalancesResponse =
       await provider.walletBalanceProvider.getUserWalletBalancesForLendingPoolProvider(

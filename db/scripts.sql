@@ -12,10 +12,12 @@ CREATE DATABASE "deposits-db"
     IS_TEMPLATE = False;
 
 
--- CREATE Table: tasks
+-- CREATE Table: Deposits
 CREATE TABLE deposits (
     id SERIAL PRIMARY KEY,
+    chainId SMALLINT NOT NULL,
     tag VARCHAR(255) NOT NULL,
-		tx VARCHAR(64) NOT NULL,
-    amount DECIMAL NOT NULL
+	  tx VARCHAR(64) NOT NULL,
+    amount DECIMAL NOT NULL,
+    account VARCHAR(64) NOT NULL
 );

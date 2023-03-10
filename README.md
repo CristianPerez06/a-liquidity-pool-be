@@ -1,6 +1,6 @@
-# \_\_a-web3-wallet-be
+# \_\_a-liquidity-pool
 
-A web3 wallet - backend
+A liquidity pool - backend
 
 ## Tech stack
 

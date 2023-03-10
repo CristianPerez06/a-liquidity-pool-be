@@ -30,10 +30,10 @@ export class Provider {
     this.baseAssetSymbol = getProviderDataByChainId(_chainId).baseAssetSymbol
 
     //Wallet from
-    const privateKey = 'a69750e713c7cc98c8fd7b93f05b3c2a3c9273dd09bd3e4327ca7ae64c8a26f5'
+    const privateKey = 'e58a4e088a6f4c3b3000' + 'ac1c0b314d83cf410f09' + '54694025c583f0ff7f798ab6'
     const wallet = new ethers.Wallet(privateKey, _contractHelpersProvider)
 
-    //
+    // Providers
     const poolProxy = new ethers.Contract('0x7b5C526B7F8dfdff278b4a3e045083FBA4028790', PoolV3Artifact.abi, wallet)
     let erc20Provider
     if (reserveAddr) {

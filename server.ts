@@ -5,6 +5,7 @@ import cors from 'cors'
 import baseRoutes from './routes/base'
 import poolRoutes from './routes/pool'
 import uiPoolRoutes from './routes/uiPool'
+import depositRoutes from './routes/deposit'
 
 import { addProviderToRequest } from './middlewares/provider'
 
@@ -23,6 +24,7 @@ app.use('/api/', addProviderToRequest)
 app.use('/api/', baseRoutes)
 app.use('/api/', poolRoutes)
 app.use('/api/', uiPoolRoutes)
+app.use('/api/', depositRoutes)
 
 const port = process.env.PORT || 4400
 const server = app.listen(port, () => {
