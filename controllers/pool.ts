@@ -42,15 +42,17 @@ export const supplyAsset = async (req: any, res: any) => {
     //     console.log(e.message)
     //   })
 
-    // const txApprove = await provider.erc20Provider.approve(provider.poolProxyProviderAddress, tokenSupply, {
-    //   gasLimit: 500000,
-    // })
-    // console.log('txApprove')
+    const txApprove = await provider.erc20Provider.approve(provider.poolProxyProviderAddress, tokenSupply, {
+      from: onBehalfOf,
+      gasLimit: 500000,
+    })
+    console.log(txApprove)
 
-    // const txSupply = await provider.poolProxyProvider.supply(asset, tokenSupply, onBehalfOf, 0, {
-    //   gasLimit: 500000,
-    // })
-    // console.log('txSupply')
+    const txSupply = await provider.poolProxyProvider.supply(asset, tokenSupply, onBehalfOf, 0, {
+      from: onBehalfOf,
+      gasLimit: 500000,
+    })
+    console.log(txSupply)
 
     const { rows } = await db.query(insertDepositQuery(provider.chainId, tag, 'tx', amount, onBehalfOf), null)
     res.status(200).send(rows[0])
